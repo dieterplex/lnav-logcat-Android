@@ -1,3 +1,4 @@
+#! /usr/bin/env lnav -i
 {
   "android_logcat_time": {
     "title": "Android logcat with time",
@@ -8,11 +9,12 @@
     ],
     "regex": {
       "std-logcat-time": {
-        "pattern": "^(?<timestamp>\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}) (?<lc_status>.{1})/(?<tag>\\S+\\s*)\\((?<pid>\\s?\\d+)\\):(?<body>.*)"
+        "pattern": "^(?<timestamp>\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2}.\\d{3}) (?<pid>\\s?\\w+) (?<tid>\\s?\\w+) (?<lc_status>\\w).(?<tag>\\S+\\s*): (?<body>.*)"
       }
     },
     "level-field": "lc_status",
     "level": {
+      "fatal": "F",
       "error": "E",
       "warning": "W",
       "info": "I",
@@ -26,11 +28,12 @@
       }, 
       "tag" : {"kind":"string", "identifier": true},
       "pid" : {"kind":"integer", "identifier":true},
+      "tid" : {"kind":"integer", "identifier": true},
       "body": {"kind":"string", "identifier": false}
     },
     "sample": [
       {
-        "line": "10-13 15:39:27.517 I/GoogleURLConnFactory( 2118): Using platform SSLCertificateSocketFactory"
+        "line": "10-13 15:39:27.517  2118  3664 I/GoogleURLConnFactory: Using platform SSLCertificateSocketFactory"
       }
     ]
   }
